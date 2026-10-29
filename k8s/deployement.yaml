@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: practical-app
+spec:
+ replicas: 2
+ selector:
+ matchLabels:
+ app: practical-app
+ template:
+ metadata:
+ labels:
+ app: practical-app
+ spec:
+ containers:
+ - name: practical-app
+ image: krithika2013/k8s-practical-app:REPLACE_WITH_PUSH_1_COMMIT_SHA
+ ports:
+ - containerPort: 5000
+ readinessProbe:
+ httpGet:
+ path: /health
+ port: 5000
+ initialDelaySeconds: 5
+ periodSeconds: 5
+
